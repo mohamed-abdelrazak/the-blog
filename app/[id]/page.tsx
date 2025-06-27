@@ -14,19 +14,15 @@ const tempImg =
   "https://images.unsplash.com/photo-1568992688065-536aad8a12f6?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 interface PageProps {
-  params: {
-    id: string;
-  };
+  params: { id: string };
 }
 
 export default async function Details({ params }: PageProps) {
   const { id } = await params;
-  // const id = params.id;
 
   if (!id || isNaN(Number(id))) return notFound();
 
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-
   if (!res.ok) return notFound();
 
   const post: IPosts = await res.json();
